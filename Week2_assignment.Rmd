@@ -1,0 +1,48 @@
+---
+title: "RMarkdown Leaflet Assignment"
+author: "Vu Thi Hoang Anh"
+date: "7/5/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction 
+
+This simple web page contains the location of different schools of Nanyang Technological University (NTU) on the map created by **leaflet**.
+
+You can also navigate to the school's website by clicking on the icon in the map.
+
+## NTU Map
+
+### 2020-07-05
+
+```{r cars}
+set.seed(2020-07-05)
+library(leaflet)
+NTUCoords <- data.frame(
+  lat = c(1.3455828, 1.3437170, 1.3436204, 1.392144, 1.3446260),
+  lng = c(103.6802091, 103.683129, 103.6800225, 103.6839463, 103.6791503))
+
+NTUIcon <- makeIcon(
+  iconUrl = "https://www3.ntu.edu.sg/cits2/maintenance/img/logo/hires_logo_bw_school.jpg",
+  iconWidth = 60, iconHeight = 30,
+  iconAnchorX = 30, iconAnchorY = 15
+)
+
+NTUSites <- c("<a href='https://www.coe.ntu.edu.sg/'>NTU College of Engineering</a>",
+             "<a href='https://www.hss.ntu.edu.sg/'>NTU School of Humanities and Social Sciences</a>",
+             "<a href='https://www.eee.ntu.edu.sg/'>NTU School of Electrical and Electronic Engineering</a>",
+             "<a href='https://www.adm.ntu.edu.sg/'>NTU School of Art Design and Media</a>",
+             "<a href='https://www.sbs.ntu.edu.sg/'>NTU School of Biological Sciences</a>"
+)
+
+NTUCoords %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(icon = NTUIcon, popup = NTUSites, clusterOptions = markerClusterOptions())
+```
+
+
